@@ -8,10 +8,19 @@ card_deck2 = [0,1,2,3,4,5,6,7]
 card_deck = card_deck1 + card_deck2 
 random.shuffle(card_deck)
 
-pos = [15,80]
+cardup_pos = [0,60]
+carddown_pos = []
+
+y = range (16)
+
+for x in y:
+    if x < 16:
+        carddown_pos.append([[x * 50 + 25, 0],[x * 50 + 25, 100]])
+ 
+        
 
 
-
+  
 
 # helper function to initialize globals
 def new_game():
@@ -23,15 +32,21 @@ def mouseclick(pos):
     # add game state logic here
     pass
     
-                        
+                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-	global pos
-	pos[0] = 15
-	for card in card_deck:
-		canvas.draw_text(str(card),pos, 50, 'White')
-		pos[0] += 50 
-
+    cardup_pos[0] = 0
+    #carddown_pos = [25,0], [25,100]
+    for card in card_deck:
+        canvas.draw_text(str(card),cardup_pos, 50, 'White')
+        cardup_pos[0] += 50 
+    for card in carddown_pos:
+        canvas.draw_polygon(card, 49, 'Green')
+        cardup_pos[0] += 50 
+        
+        
+ 
+ #   pass
 
 
 # create frame and add a button and labels
