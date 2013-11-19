@@ -7,11 +7,8 @@ card_deck1 = [0,1,2,3,4,5,6,7]
 card_deck2 = [0,1,2,3,4,5,6,7]
 card_deck = card_deck1 + card_deck2 
 
+pos = [15,80]
 
-print (card_deck)
-
-print (card_deck1[7])
-print (card_deck2[3])
 
 
 
@@ -28,7 +25,12 @@ def mouseclick(pos):
                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-    pass
+	global pos
+	pos[0] = 15
+	for card in card_deck:
+		canvas.draw_text(str(card),pos, 50, 'White')
+		pos[0] += 50 
+
 
 
 # create frame and add a button and labels
