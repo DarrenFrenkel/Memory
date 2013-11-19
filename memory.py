@@ -6,6 +6,7 @@ import random
 card_deck1 = [0,1,2,3,4,5,6,7]
 card_deck2 = [0,1,2,3,4,5,6,7]
 card_deck = card_deck1 + card_deck2 
+random.shuffle(card_deck)
 
 pos = [15,80]
 
