@@ -6,11 +6,11 @@ card_deck1 =  [0,1,2,3,4,5,6,7]
 card_deck2 =  [0,1,2,3,4,5,6,7]
 card_deck = card_deck1 + card_deck2
 random.shuffle(card_deck)
-cardup_pos = [0,60]
+cardup_pos = 0
 carddown_pos = []
 y = range (16)
-exposed = []
- 
+exposed = 16*[False]
+
 
 
   
@@ -19,31 +19,34 @@ exposed = []
 for x in y:
     if x < 16:
         carddown_pos.append([[x * 50 + 25, 0],[x * 50 + 25, 100]])
-    if x % 2 == 0:
-        exposed.append(True)
-    else:
-        exposed.append(False)
-            
+   
+                       
 
 def new_game():
     pass  
 
-     
+   
 # define event handlers
 def mouseclick(pos):
+    global click, exposed
     # add game state logic here
-    pass
-    
+    click = pos[0] // 50
+    for x in y:
+        if click == x:
+            exposed.pop(x)
+            exposed.insert(x,True)
+          
+
                          
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
     z = 0
-    cardup_pos[0] = 0
-    for x in card_deck:
-        canvas.draw_text(str(x),cardup_pos, 50, 'White')
-        cardup_pos[0] += 50
-    for x in exposed:
-        if x == False:  
+    cardup_pos = -40
+    for x in range(len(card_deck)):
+        cardup_pos += 50
+        if exposed[x] == True:
+            canvas.draw_text(str(card_deck[x]), [cardup_pos,70] , 50, 'White')
+        elif exposed[x] == False:  
                 canvas.draw_polygon(carddown_pos[z], 49, 'Green')
         z += 1 
  
