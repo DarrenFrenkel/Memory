@@ -11,8 +11,6 @@ carddown_pos = []
 y = range (16)
 exposed = 16*[False]
 
-
-
   
 
 # helper function to initialize globals
@@ -20,10 +18,12 @@ for x in y:
     if x < 16:
         carddown_pos.append([[x * 50 + 25, 0],[x * 50 + 25, 100]])
    
-                       
+            
+           
 
 def new_game():
     pass  
+
 
    
 # define event handlers
@@ -32,10 +32,10 @@ def mouseclick(pos):
     # add game state logic here
     click = pos[0] // 50
     for x in y:
-        if click == x:
+        if click == x and exposed[x] == False:
             exposed.pop(x)
             exposed.insert(x,True)
-          
+           
 
                          
 # cards are logically 50x100 pixels in size    
@@ -49,7 +49,6 @@ def draw(canvas):
         elif exposed[x] == False:  
                 canvas.draw_polygon(carddown_pos[z], 49, 'Green')
         z += 1 
- 
 # pass
 
 
@@ -68,3 +67,5 @@ frame.start()
 
 
 # Always remember to review the grading rubric
+
+  
