@@ -15,7 +15,7 @@ guess1 = 5000
 guess2 = 5000
 index1 = 5000
 index2 = 5000
-turns = 1
+turns = 0
 
   
 
