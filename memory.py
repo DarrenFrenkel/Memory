@@ -10,6 +10,12 @@ cardup_pos = 0
 carddown_pos = []
 y = range (16)
 exposed = 16*[False]
+state = 0
+guess1 = 5000
+guess2 = 5000
+index1 = 5000
+index2 = 5000
+
 
   
 
@@ -28,13 +34,54 @@ def new_game():
    
 # define event handlers
 def mouseclick(pos):
-    global click, exposed
+    global click, exposed, state,guess1, guess2, index1, index2
     # add game state logic here
     click = pos[0] // 50
-    for x in y:
-        if click == x and exposed[x] == False:
-            exposed.pop(x)
-            exposed.insert(x,True)
+    if state == 0:
+        for x in y:
+            if click == x and exposed[x] == False:
+                exposed.pop(x)
+                exposed.insert(x,True)
+                index1 = x                
+        state = 1 
+        guess1 = card_deck[click]
+
+    elif state == 1:
+        for x in y:
+            if click == x and exposed[x] == False:
+                exposed.pop(x)
+                exposed.insert(x,True)
+                index2 = x	                
+        state = 2 
+        guess2 = card_deck[click]
+        
+    elif state == 2:
+        if guess1 != guess2:
+            exposed.pop(index1)
+            exposed.insert(index1,False)
+            exposed.pop(index2)
+            exposed.insert(index2,False)
+            for x in y:
+                if click == x and exposed[x] == False:
+                    exposed.pop(x)
+                    exposed.insert(x,True)
+                    index1 = x
+            state = 1
+            guess1 = card_deck[click]
+
+        else:
+            for x in y:
+                if click == x and exposed[x] == False:
+                    exposed.pop(x)
+                    exposed.insert(x,True)
+                    index1 = x
+            state = 1
+            guess1 = card_deck[click]
+
+            
+                    
+
+            
            
 
                          
@@ -67,5 +114,3 @@ frame.start()
 
 
 # Always remember to review the grading rubric
-
-  
