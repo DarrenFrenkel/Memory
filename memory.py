@@ -19,17 +19,23 @@ turns = 0
 
   
 
+
+  
+
 # helper function to initialize globals
 for x in y:
     if x < 16:
         carddown_pos.append([[x * 50 + 25, 0],[x * 50 + 25, 100]])
    
-            
+def restart_game():
+    global exposed, turns
+    exposed = 16*[False]
+    random.shuffle(card_deck)
+    turns = 0
            
 
 def new_game():
-    global turns
-    turns = 0
+    restart_game()
     pass  
 
 
