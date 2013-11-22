@@ -8,7 +8,7 @@ card_deck = card_deck1 + card_deck2
 random.shuffle(card_deck)
 cardup_pos = 0
 carddown_pos = []
-y = range (16)
+y = range (0,16)
 exposed = 16*[False]
 state = 0
 guess1 = 5000
@@ -16,8 +16,6 @@ guess2 = 5000
 index1 = 5000
 index2 = 5000
 turns = 0
-
-  
 
 
   
@@ -42,7 +40,7 @@ def new_game():
    
 # define event handlers
 def mouseclick(pos):
-    global click, exposed, state,guess1, guess2, index1, index2, turns, hello
+    global click,click1, click2, exposed, state,guess1, guess2, index1, index2, turns, hello
     click = pos[0] // 50
     if state == 0:
         for x in y:
@@ -52,6 +50,8 @@ def mouseclick(pos):
                 index1 = x                
                 state = 1 
                 guess1 = card_deck[click]
+                click1 = click
+
     elif state == 1:
         for x in y:
             if click == x and exposed[x] == False:
@@ -59,9 +59,11 @@ def mouseclick(pos):
                 exposed.insert(x,True)
                 index2 = x	                
                 state = 2 
-                guess2 = card_deck[click]    
+                guess2 = card_deck[click]
+                click2 = click
+
     elif state == 2:
-        if guess1 != guess2:
+        if guess1 != guess2 and index1 != click and index2 != click:
             exposed.pop(index1)
             exposed.insert(index1,False)
             exposed.pop(index2)
@@ -73,7 +75,7 @@ def mouseclick(pos):
                     exposed.insert(x,True)
                     index1 = x
                     state = 1
-                    guess1 = card_deck[click]   
+                    guess1 = card_deck[click]        
         else:
             for x in y:
                 if click == x and exposed[x] == False:
@@ -82,9 +84,7 @@ def mouseclick(pos):
                     index1 = x
                     state = 1
                     guess1 = card_deck[click]
-            
-           
-
+       
                          
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
